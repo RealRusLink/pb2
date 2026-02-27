@@ -12,3 +12,5 @@ function consume(time, iterator){
 }
 
 
+let a = iterate([1, 2, 3, 4])
+consume(3, a)

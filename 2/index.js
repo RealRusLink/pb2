@@ -1,5 +1,4 @@
-import { iterate } from "./gen.js";
-import { consume } from "./cons.js";
+import { iterate, consume } from "iterlib"
 
 process.stdin.setEncoding("utf8");
 

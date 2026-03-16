@@ -21,6 +21,9 @@ const commands = {
         consume(state.timeout, iterate(state.array));
         console.log("Done");
     },
+    state: () => {
+        console.log(state)
+    },
     exit: () => {
         console.log("Exit");
         process.exit();

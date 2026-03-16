@@ -1,5 +1,3 @@
-import { use } from "react";
-
 function memoize(fn, cache = new Map()){
     return function(...args){
         const key = JSON.stringify(args);
@@ -40,9 +38,9 @@ function newCacheLFU(size = Infinity){
             if (size < cache.size + 1){ 
                 let used = Infinity;
                 let lfu_key;
-                for (let item of cache.keys()){
-                    if (cache.get(item).used < used){
-                        used = cache.get(item).used;
+                for (let [item, record] of cache.entries()){
+                    if (record.used < used){
+                        used = record.used;
                         lfu_key = item;
                     }
                     if (used == 1) break;
@@ -60,3 +58,24 @@ function newCacheLFU(size = Infinity){
 }
 
 
+function newCacheTBE(size = Infinity, timeToLive = 100){
+    const cache = new Map();
+    return {
+        set: (key, value) => {
+            cache.set(key, {value, deleteAt: Date.now() + timeToLive * 1000});
+            return cache.size
+        },
+        has: (key) => {
+            const now = Date.now();
+                for (let [item, record] of cache.entries()) {
+                    if (now > record.deleteAt) {
+                        cache.delete(item);
+                    }
+                }
+            return cache.has(key);
+        },
+        get: (key) => {
+            return cache.get(key).value;
+        },
+    }
+}

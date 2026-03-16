@@ -1,4 +1,4 @@
-function memoize(fn, cache = new Map()){
+export function memoize(fn, cache = new Map()){
     return function(...args){
         const key = JSON.stringify(args);
         if (cache.has(key)){
@@ -11,7 +11,7 @@ function memoize(fn, cache = new Map()){
     }
 }
 
-function newCacheLRU(size = Infinity){
+export function newCacheLRU(size = Infinity){
     const cache = new Map();
     return {
         set: (key, value) => {
@@ -27,11 +27,12 @@ function newCacheLRU(size = Infinity){
             cache.set(key, value);
             return value;
         },
+        all: () => cache,
     }
 }
 
 
-function newCacheLFU(size = Infinity){
+export function newCacheLFU(size = Infinity){
     const cache = new Map();
     return {
         set: (key, value) => {
@@ -54,11 +55,12 @@ function newCacheLFU(size = Infinity){
             cache.get(key).used += 1;
             return cache.get(key).value;
         },
+        all: () => cache,
     }
 }
 
 
-function newCacheTBE(size = Infinity, timeToLive = 100){
+export function newCacheTBE(size = Infinity, timeToLive = 100){
     const cache = new Map();
     return {
         set: (key, value) => {
@@ -77,5 +79,6 @@ function newCacheTBE(size = Infinity, timeToLive = 100){
         get: (key) => {
             return cache.get(key).value;
         },
+        all: () => cache,
     }
 }

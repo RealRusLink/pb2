@@ -1,8 +1,12 @@
 {
-  "name": "mem-lib",
+  "name": "3",
   "version": "1.0.0",
   "description": "",
-  "main": "memoization.js",
+  "main": "index.js",
+  "dependencies": {
+    "mem-lib": "file:./mem-lib"
+  },
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -15,3 +15,9 @@ async function* createReader(path, chunkSize) {
         offset += currentSize;
     }
 }
+
+let a = await createReader("./iteratorReader.js", 10)
+
+for await (let b of a){
+    console.log(b)
+}

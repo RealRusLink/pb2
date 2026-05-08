@@ -6,3 +6,8 @@ class MovementDetector extends EventEmitter {
         this.emit("movement", {x, y})
     }
 }
+
+
+function callPolice(coordinates){
+    console.log(`Calling police to (${x}, ${y})`)
+}

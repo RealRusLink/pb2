@@ -11,3 +11,7 @@ class MovementDetector extends EventEmitter {
 function callPolice(coordinates){
     console.log(`Calling police to (${x}, ${y})`)
 }
+
+function takePhoto(coordinates){
+    console.log(`Took photo of (${x}, ${y})`)
+}

@@ -26,3 +26,23 @@ function landmine(coords, listen){
     }
     listen.on("movement", explode)
 }
+
+
+
+const detector = new MovementDetector();
+
+detector.on("movement", callPolice)
+detector.on("movement", takePhoto)
+
+landmine({x: 10, y: 10}, detector)
+
+
+detector.detect(2, 3)
+detector.detect(5, 5)
+detector.detect(10, 10)
+detector.detect(2, 3)
+detector.detect(10, 10) // mine can only be used once((
+
+
+detector.off("movement", callPolice)
+detector.off("movement", takePhoto)

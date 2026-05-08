@@ -11,7 +11,7 @@ async function* createReader(path, chunkSize) {
     while (offset < size) {
         let currentSize = chunkSize <= (size - offset) ? chunkSize : size - offset;
         await file.read(buffer, 0, currentSize, offset)
-        yield buffer.toString('utf-8')
+        yield buffer.toString('utf-8', 0, currentSize)
         offset += currentSize;
     }
 }

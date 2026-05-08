@@ -8,10 +8,21 @@ class MovementDetector extends EventEmitter {
 }
 
 
-function callPolice(coordinates){
+function callPolice({x, y}){
     console.log(`Calling police to (${x}, ${y})`)
 }
 
-function takePhoto(coordinates){
+function takePhoto({x, y}){
     console.log(`Took photo of (${x}, ${y})`)
+}
+
+
+function landmine(coords, listen){
+    const explode = ({x, y}) => {
+        if (coords.x === x && coords.y === y){
+            console.log("💥")
+            listen.off("movement", explode)
+        }
+    }
+    listen.on("movement", explode)
 }
